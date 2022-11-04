@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>User</title>
+</head>
+<body>
+	<h2>
+		<!-- 提交時會做「send()」，並傳回true讓action作用 -->
+		<form onsubmit="return send()" action="JSONServlet" method="post">
+			Name: <input type="text" id="userName" value="John"></input><br>
+			Phone: <input type="text" id="phone" value="23826015"></input><br>
+			Address: <input type="text" id="address" value="Taipei"></input><br>
+			<!-- 隱藏的項目，為的是提供一個「name」給Servlet當request使用 -->
+			<input type="hidden" name="mydata" id="mydata" />
+			<button>Send</button>
+		</form>
+	</h2>
+	<script>
+		function send(){
+			//造一個物件，準備放入名字、電話、地址
+			var obj={};
+			//幫物件加入名字、電話、地址的屬性，其中的值則是填入表單中對應id的值
+			obj.userName=document.getElementById("userName").value;
+	        obj.phone=document.getElementById("phone").value;
+	        obj.address=document.getElementById("address").value;
+	        //造一個物件，放入隱藏的項目mydata
+	        var hd=document.getElementById("mydata");
+	        //mydata物件的值：有名字、電話、地址的物件
+	        hd.value=JSON.stringify(obj);
+	        return true;
+		}
+	</script>
+</body>
+</html>
